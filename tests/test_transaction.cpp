@@ -43,8 +43,6 @@ TEST(TransactionTest, Make_Success_WithMock) {
     MockTransaction t;
     t.set_fee(10);
     Account from(1, 200), to(2, 50);
-    from.Lock();
-    to.Lock();
     EXPECT_CALL(t, SaveToDataBase(::testing::_, ::testing::_, ::testing::_))
         .Times(1);
     EXPECT_TRUE(t.Make(from, to, 150));
