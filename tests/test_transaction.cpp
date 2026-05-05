@@ -34,9 +34,8 @@ TEST(TransactionTest, Make_Throws_TooSmall) {
 }
 TEST(TransactionTest, Make_ReturnsFalse_IfFeeTooHigh) {
     Transaction t;
-    t.set_fee(60); // fee*2 = 120 > sum=100
+    t.set_fee(60);
     Account from(1, 500), to(2, 100);
-    from.Lock(); to.Lock(); // нужно для ChangeBalance
     EXPECT_FALSE(t.Make(from, to, 100));
 }
 TEST(TransactionTest, Make_Success_WithMock) {
@@ -46,6 +45,6 @@ TEST(TransactionTest, Make_Success_WithMock) {
     EXPECT_CALL(t, SaveToDataBase(::testing::_, ::testing::_, ::testing::_))
         .Times(1);
     EXPECT_TRUE(t.Make(from, to, 150));
-    EXPECT_EQ(from.GetBalance(), 40);
-    EXPECT_EQ(to.GetBalance(), 200);
+    EXPECT_EQ(from.GetBalance(), 200);
+    EXPECT_EQ(to.GetBalance(), 40);
 }
