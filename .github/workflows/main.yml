@@ -29,7 +29,7 @@ jobs:
                --ignore-errors mismatch \
                --exclude '*/_deps/*' \
                --exclude '*/tests/*'
-          lcov --remove coverage.info '/usr/*' -o coverage.info
+          lcov --remove coverage.info '/usr/*' -o coverage.info --ignore-errors unused
 
       - name: Coveralls
         uses: coverallsapp/github-action@v2
