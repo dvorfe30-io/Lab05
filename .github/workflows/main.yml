@@ -21,8 +21,15 @@ jobs:
 
       - name: Coverage
         run: |
-          lcov --capture --directory build --base-directory . --output-file coverage.info --no-external
-          lcov --remove coverage.info '*/_deps/*' '*/tests/*' '/usr/*' -o coverage.info
+          lcov --capture \
+               --directory build \
+               --base-directory . \
+               --output-file coverage.info \
+               --no-external \
+               --ignore-errors mismatch \
+               --exclude '*/_deps/*' \
+               --exclude '*/tests/*'
+          lcov --remove coverage.info '/usr/*' -o coverage.info
 
       - name: Coveralls
         uses: coverallsapp/github-action@v2
